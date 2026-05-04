@@ -9,9 +9,10 @@ async function updatePost(formData: FormData) {
   redirect('/admin/writing')
 }
 
-export default async function EditPostPage({ params }: { params: { id: string } }) {
+export default async function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const sb = await createSupabaseServerClient()
-  const { data: post } = await sb.from('posts').select('*').eq('id', params.id).single()
+  const { data: post } = await sb.from('posts').select('*').eq('id', id).single()
   if (!post) notFound()
 
   const dateStr = new Date(post.published_at).toISOString().split('T')[0]
