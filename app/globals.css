@@ -32,6 +32,7 @@
   --accent-text: #33603f;
   --divider: rgba(0, 0, 0, 0.04);
   --nav-bg: rgba(240, 237, 232, 0.85);
+  --map-filter: grayscale(0.2) brightness(0.95) saturate(0.8);
 }
 
 /* ─── Base ────────────────────────────────────────────── */

@@ -8,12 +8,18 @@ interface WritingTileProps {
 export function WritingTile({ posts }: WritingTileProps) {
   return (
     <TiltCard className="tile col-span-2 md:col-span-4 p-5" id="writing">
-      <p
-        className="text-[10px] uppercase tracking-widest mb-4"
-        style={{ color: 'var(--text-subtle)' }}
-      >
-        Writing
-      </p>
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+          Writing
+        </p>
+        <a
+          href="/writing"
+          className="text-[10px] hover:opacity-60 transition-opacity"
+          style={{ color: 'var(--accent-text)' }}
+        >
+          All posts →
+        </a>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {posts.slice(0, 3).map((post, i) => (
