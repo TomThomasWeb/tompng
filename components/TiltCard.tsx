@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion'
 import clsx from 'clsx'
 import { tileVariants } from './BentoGrid'
@@ -19,12 +19,24 @@ export function TiltCard({ children, className, style, id, onMouseEnter, onMouse
   const ref = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
+  const breatheScale = useMotionValue(1)
 
   const rotateX = useTransform(y, [-0.5, 0.5], [6, -6])
   const rotateY = useTransform(x, [-0.5, 0.5], [-6, 6])
 
   // Stable random delay per tile — runs once on mount, client-only
-  const [breatheDelay] = useState(() => Math.random() * 5)
+  const [breatheDelay] = useState<number>(() => Math.random() * 5)
+
+  // Breathing scale — same element as tilt so no height/layout issues
+  useEffect(() => {
+    const controls = animate(breatheScale, [1, 1.003, 1], {
+      duration: 5,
+      repeat: Infinity,
+      ease: 'easeInOut',
+      delay: breatheDelay,
+    })
+    return () => controls.stop()
+  }, [breatheDelay, breatheScale])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -43,26 +55,14 @@ export function TiltCard({ children, className, style, id, onMouseEnter, onMouse
       ref={ref}
       id={id}
       variants={tileVariants}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d', ...style }}
+      style={{ rotateX, rotateY, scale: breatheScale, transformStyle: 'preserve-3d', ...style }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={onMouseEnter}
       onClick={onClick}
       className={clsx('will-change-transform', className)}
     >
-      {/* Breathing inner wrapper — separate element so tilt transforms don't conflict */}
-      <motion.div
-        animate={{ scale: [1, 1.003, 1] }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay: breatheDelay,
-        }}
-        style={{ width: '100%', height: '100%' }}
-      >
-        {children}
-      </motion.div>
+      {children}
     </motion.div>
   )
 }
