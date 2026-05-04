@@ -18,7 +18,7 @@ export async function saveBio(formData: FormData) {
     await sb.from('bio_content').insert({ bio_text, one_liners })
   }
   revalidatePath('/')
-  return { success: true }
+
 }
 
 // ─── Now ──────────────────────────────────────────────────
@@ -39,7 +39,7 @@ export async function saveNow(formData: FormData) {
     await sb.from('now_content').insert(payload)
   }
   revalidatePath('/')
-  return { success: true }
+
 }
 
 // ─── Games ────────────────────────────────────────────────
@@ -64,7 +64,7 @@ export async function saveGames(formData: FormData) {
     }
   }
   revalidatePath('/')
-  return { success: true }
+
 }
 
 // ─── Albums ───────────────────────────────────────────────
@@ -85,7 +85,7 @@ export async function saveAlbums(formData: FormData) {
     }
   }
   revalidatePath('/')
-  return { success: true }
+
 }
 
 // ─── Gear ─────────────────────────────────────────────────
@@ -106,14 +106,14 @@ export async function saveGearItem(formData: FormData) {
     await sb.from('gear').insert(payload)
   }
   revalidatePath('/')
-  return { success: true }
+
 }
 
 export async function deleteGearItem(id: string) {
   const sb = await createSupabaseServerClient()
   await sb.from('gear').delete().eq('id', id)
   revalidatePath('/')
-  return { success: true }
+
 }
 
 // ─── Freelance / TT ───────────────────────────────────────
@@ -135,7 +135,7 @@ export async function saveFreelance(formData: FormData) {
     await sb.from('tt_content').insert(payload)
   }
   revalidatePath('/')
-  return { success: true }
+
 }
 
 // ─── Posts ────────────────────────────────────────────────
@@ -161,7 +161,7 @@ export async function savePost(formData: FormData) {
   }
   revalidatePath('/')
   revalidatePath('/writing')
-  return { success: true }
+
 }
 
 export async function deletePost(id: string) {
@@ -169,7 +169,7 @@ export async function deletePost(id: string) {
   await sb.from('posts').delete().eq('id', id)
   revalidatePath('/')
   revalidatePath('/writing')
-  return { success: true }
+
 }
 
 // ─── Settings ─────────────────────────────────────────────
@@ -188,7 +188,7 @@ export async function saveSettings(formData: FormData) {
     await sb.from('site_settings').insert(payload)
   }
   revalidatePath('/')
-  return { success: true }
+
 }
 
 // ─── Photos ───────────────────────────────────────────────
@@ -197,7 +197,7 @@ export async function savePhotoRecord(url: string, caption: string, location: st
   const sb = await createSupabaseServerClient()
   await sb.from('photos').insert({ url, caption, location, display_order })
   revalidatePath('/')
-  return { success: true }
+
 }
 
 export async function deletePhoto(id: string, url: string) {
@@ -208,12 +208,12 @@ export async function deletePhoto(id: string, url: string) {
   // Delete from DB
   await sb.from('photos').delete().eq('id', id)
   revalidatePath('/')
-  return { success: true }
+
 }
 
 export async function updatePhotoMeta(id: string, caption: string, location: string) {
   const sb = await createSupabaseServerClient()
   await sb.from('photos').update({ caption, location }).eq('id', id)
   revalidatePath('/')
-  return { success: true }
+
 }
