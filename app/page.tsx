@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <main
-      className="min-h-screen px-4 py-6 md:px-8 md:py-8 max-w-[1100px] mx-auto"
+      className="min-h-screen px-6 py-8 md:px-10 md:py-12 lg:px-16 max-w-[1360px] mx-auto"
       style={{ perspective: '1200px' }}
     >
       <Nav />

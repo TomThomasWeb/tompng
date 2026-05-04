@@ -51,7 +51,7 @@ function TypewriterTitle({ text, delay = 0 }: { text: string; delay?: number }) 
 
 export function WritingTile({ posts }: WritingTileProps) {
   return (
-    <TiltCard className="tile col-span-2 md:col-span-4 p-5" id="writing">
+    <TiltCard className="tile col-span-2 md:col-span-4 p-6" id="writing">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-1.5">
           <Icon name="pen" size={10} style={{ color: 'var(--text-subtle)' }} />

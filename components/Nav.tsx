@@ -4,7 +4,12 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from './ThemeProvider'
 
-const navLinks = ['photos', 'work', 'writing', 'now']
+const navLinks = [
+  { label: 'photos',  href: '#photos'   },
+  { label: 'work',    href: '#work'     },
+  { label: 'writing', href: '/writing'  },
+  { label: 'now',     href: '/now'      },
+]
 
 function FireNationOverlay({ onDone }: { onDone: () => void }) {
   useEffect(() => {
@@ -142,14 +147,14 @@ export function Nav() {
         </button>
 
         <div className="flex items-center gap-4">
-          {navLinks.map((link) => (
+          {navLinks.map(({ label, href }) => (
             <a
-              key={link}
-              href={`#${link}`}
+              key={label}
+              href={href}
               className="text-[12px] transition-colors duration-150 hover:opacity-80"
               style={{ color: 'var(--text-subtle)' }}
             >
-              {link}
+              {label}
             </a>
           ))}
 

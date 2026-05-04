@@ -20,7 +20,7 @@ export function GearTile({ gear }: GearTileProps) {
   const [tooltip, setTooltip] = useState<string | null>(null)
 
   return (
-    <TiltCard className="tile col-span-2 p-5" id="work">
+    <TiltCard className="tile col-span-2 p-6" id="work">
       <div className="flex items-center gap-1.5 mb-4">
         <Icon name="wrench" size={10} style={{ color: 'var(--text-subtle)' }} />
         <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>

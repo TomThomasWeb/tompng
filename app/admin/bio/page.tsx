@@ -13,12 +13,20 @@ export default async function BioAdmin() {
       <h1 className="text-[22px] font-semibold mb-6" style={{ color: 'var(--text)' }}>Bio</h1>
       <form action={saveBio} className="flex flex-col gap-5">
         <SectionCard title="Short bio">
-          <TextareaField
-            label="Bio text"
-            name="bio_text"
-            defaultValue={bio.bio_text}
-            rows={3}
-          />
+          <div className="flex flex-col gap-4">
+            <FormField
+              label="Profile image URL"
+              name="profile_image"
+              defaultValue={bio.profile_image ?? ''}
+              placeholder="https://... (paste a URL to your photo)"
+            />
+            <TextareaField
+              label="Bio text"
+              name="bio_text"
+              defaultValue={bio.bio_text}
+              rows={3}
+            />
+          </div>
         </SectionCard>
         <SectionCard title="Rotating one-liners">
           <TextareaField

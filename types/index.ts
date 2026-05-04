@@ -55,6 +55,7 @@ export interface SiteData {
   bio: {
     one_liners: string[]
     short_bio: string
+    profile_image?: string
   }
   photos: Photo[]
   games: Game[]

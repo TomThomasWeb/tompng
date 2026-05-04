@@ -50,7 +50,7 @@ export function FreelanceTile({ freelance }: FreelanceTileProps) {
   const { count, ref } = useCountUp(freelance.projects_count)
 
   return (
-    <TiltCard className="tile col-span-2 p-5 flex flex-col justify-between">
+    <TiltCard className="tile col-span-2 p-6 flex flex-col justify-between">
       <div>
         <div className="flex items-start justify-between mb-3">
           <div>

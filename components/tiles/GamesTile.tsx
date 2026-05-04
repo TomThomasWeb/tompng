@@ -26,7 +26,7 @@ export function GamesTile({ games }: GamesTileProps) {
 
   return (
     <TiltCard
-      className="tile col-span-2 md:col-span-1 p-4 md:p-[18px]"
+      className="tile col-span-2 md:col-span-1 p-5 md:p-6"
       style={{ backgroundColor: bgColor, transition: 'background-color 0.3s ease' } as React.CSSProperties}
     >
       <div className="flex items-center gap-1.5 mb-3">

@@ -42,7 +42,7 @@ export function AlbumsTile({ albums }: AlbumsTileProps) {
 
   return (
     <TiltCard
-      className="tile col-span-1 p-4"
+      className="tile col-span-1 p-5"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >

@@ -31,8 +31,11 @@ export function BentoGrid({ children }: BentoGridProps) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-auto"
-      style={{ perspective: '1200px' }}
+      className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5"
+      style={{
+        gridAutoRows: 'minmax(200px, auto)',
+        perspective: '1200px',
+      }}
     >
       {children}
     </motion.div>

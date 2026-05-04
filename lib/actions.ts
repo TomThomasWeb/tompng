@@ -10,12 +10,13 @@ export async function saveBio(formData: FormData) {
   const bio_text = formData.get('bio_text') as string
   const one_liners_raw = formData.get('one_liners') as string
   const one_liners = one_liners_raw.split('\n').map((s) => s.trim()).filter(Boolean)
+  const profile_image = formData.get('profile_image') as string
 
   const { data: existing } = await sb.from('bio_content').select('id').single()
   if (existing) {
-    await sb.from('bio_content').update({ bio_text, one_liners, updated_at: new Date().toISOString() }).eq('id', existing.id)
+    await sb.from('bio_content').update({ bio_text, one_liners, profile_image, updated_at: new Date().toISOString() }).eq('id', existing.id)
   } else {
-    await sb.from('bio_content').insert({ bio_text, one_liners })
+    await sb.from('bio_content').insert({ bio_text, one_liners, profile_image })
   }
   revalidatePath('/')
 

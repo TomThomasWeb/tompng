@@ -17,6 +17,7 @@ export const siteData: SiteData = {
     ],
     short_bio:
       "Photographer, web designer, and general creative. I work at Alps by day and build things the rest of the time.",
+    profile_image: '',
   },
 
   photos: [

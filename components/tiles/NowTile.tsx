@@ -54,11 +54,11 @@ export function NowTile({ now }: NowTileProps) {
   const { time, date } = useCongleton()
 
   return (
-    <TiltCard className="tile col-span-2 overflow-hidden" id="now" style={{ minHeight: '200px' }}>
+    <TiltCard className="tile col-span-2 overflow-hidden" id="now">
       <div className="flex h-full">
 
         {/* Left — activity fields */}
-        <div className="flex-1 flex flex-col justify-between p-4 min-w-0">
+        <div className="flex-1 flex flex-col justify-between p-6 min-w-0">
           <div className="flex items-center gap-1.5 mb-3">
             <Icon name="clock" size={10} style={{ color: 'var(--text-subtle)' }} />
             <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>
