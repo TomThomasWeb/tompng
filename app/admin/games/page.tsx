@@ -34,6 +34,12 @@ export default async function GamesAdmin() {
                   defaultValue={game?.dominant_color ?? '#4a7c5f'}
                 />
               </div>
+              <FormField
+                label="Cover art URL"
+                name={`game_image_${i}`}
+                defaultValue={game?.image_url ?? ''}
+                placeholder="https://... (paste an image URL for the game cover)"
+              />
               <div className="mt-3">
                 <FormField
                   label="Note (optional)"

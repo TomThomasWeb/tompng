@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { TiltCard } from '../TiltCard'
+import { Icon, type IconName } from '../Icon'
 import type { NowContent } from '@/types'
 
 interface NowTileProps {
@@ -40,42 +41,39 @@ function useCongleton() {
   return { time, date }
 }
 
-const fields: { key: keyof NowContent; label: string }[] = [
-  { key: 'working_on',   label: 'Working on'   },
-  { key: 'reading',      label: 'Reading'       },
-  { key: 'learning',     label: 'Learning'      },
-  { key: 'shooting_with', label: 'Shooting with' },
-]
-
-// OSM tile for Congleton, zoom 13 — centre tile (53.1635°N, 2.2160°W)
 const MAP_TILE = 'https://tile.openstreetmap.org/13/4046/2662.png'
+
+const FIELDS: { key: keyof NowContent; label: string; icon: IconName }[] = [
+  { key: 'working_on',    label: 'Working on',    icon: 'code'    },
+  { key: 'reading',       label: 'Reading',        icon: 'book'    },
+  { key: 'learning',      label: 'Learning',       icon: 'music'   },
+  { key: 'shooting_with', label: 'Shooting with',  icon: 'camera'  },
+]
 
 export function NowTile({ now }: NowTileProps) {
   const { time, date } = useCongleton()
 
   return (
-    <TiltCard
-      className="tile col-span-2 overflow-hidden"
-      id="now"
-      style={{ minHeight: '200px' }}
-    >
+    <TiltCard className="tile col-span-2 overflow-hidden" id="now" style={{ minHeight: '200px' }}>
       <div className="flex h-full">
 
         {/* Left — activity fields */}
         <div className="flex-1 flex flex-col justify-between p-4 min-w-0">
-          <p
-            className="text-[10px] uppercase tracking-widest mb-3"
-            style={{ color: 'var(--text-subtle)' }}
-          >
-            Now
-          </p>
+          <div className="flex items-center gap-1.5 mb-3">
+            <Icon name="clock" size={10} style={{ color: 'var(--text-subtle)' }} />
+            <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+              Now
+            </p>
+          </div>
+
           <div className="flex flex-col gap-2.5 flex-1 justify-center">
-            {fields.map(({ key, label }) => (
+            {FIELDS.map(({ key, label, icon }) => (
               <div key={key}>
-                <p className="text-[10px] mb-0.5" style={{ color: 'var(--accent)' }}>
-                  {label}
-                </p>
-                <p className="text-[11px] leading-snug truncate" style={{ color: 'var(--text)' }}>
+                <div className="flex items-center gap-1 mb-0.5">
+                  <Icon name={icon} size={9} style={{ color: 'var(--accent)', opacity: 0.8 }} />
+                  <p className="text-[10px]" style={{ color: 'var(--accent)' }}>{label}</p>
+                </div>
+                <p className="text-[11px] leading-snug truncate pl-[13px]" style={{ color: 'var(--text)' }}>
                   {now[key]}
                 </p>
               </div>
@@ -88,7 +86,6 @@ export function NowTile({ now }: NowTileProps) {
 
         {/* Right — Congleton map + clock */}
         <div className="relative overflow-hidden" style={{ width: '180px', flexShrink: 0 }}>
-          {/* OSM map tile as background */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={MAP_TILE}
@@ -97,14 +94,9 @@ export function NowTile({ now }: NowTileProps) {
             className="absolute inset-0 w-full h-full object-cover"
             style={{ filter: 'var(--map-filter, grayscale(0.4) brightness(0.6) saturate(0.7))' }}
           />
+          <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.35)' }} />
 
-          {/* Dark scrim */}
-          <div
-            className="absolute inset-0"
-            style={{ background: 'rgba(0,0,0,0.35)' }}
-          />
-
-          {/* OSM attribution (required) */}
+          {/* OSM attribution */}
           <a
             href="https://www.openstreetmap.org/copyright"
             target="_blank"
@@ -117,27 +109,23 @@ export function NowTile({ now }: NowTileProps) {
 
           {/* Clock overlay */}
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-1">
-            <p
-              className="text-[9px] uppercase tracking-[0.2em]"
-              style={{ color: 'rgba(255,255,255,0.7)' }}
-            >
-              Congleton
-            </p>
+            <div className="flex items-center gap-1">
+              <Icon name="pin" size={9} style={{ color: 'rgba(255,255,255,0.6)' }} />
+              <p className="text-[9px] uppercase tracking-[0.2em]" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                Congleton
+              </p>
+            </div>
             <p
               className="font-mono tabular-nums text-[20px] font-semibold leading-none"
               style={{ color: '#fff', textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}
             >
               {time}
             </p>
-            <p
-              className="text-[9px]"
-              style={{ color: 'rgba(255,255,255,0.55)' }}
-            >
+            <p className="text-[9px]" style={{ color: 'rgba(255,255,255,0.55)' }}>
               {date}
             </p>
           </div>
         </div>
-
       </div>
     </TiltCard>
   )

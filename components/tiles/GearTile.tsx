@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { TiltCard } from '../TiltCard'
+import { Icon } from '../Icon'
 import type { GearItem, VerdictBadge } from '@/types'
 
 interface GearTileProps {
@@ -20,9 +21,12 @@ export function GearTile({ gear }: GearTileProps) {
 
   return (
     <TiltCard className="tile col-span-2 p-5" id="work">
-      <p className="text-[10px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-subtle)' }}>
-        Gear
-      </p>
+      <div className="flex items-center gap-1.5 mb-4">
+        <Icon name="wrench" size={10} style={{ color: 'var(--text-subtle)' }} />
+        <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+          Gear
+        </p>
+      </div>
 
       <div className="grid grid-cols-2 gap-x-6 gap-y-3">
         {gear.map((item) => {

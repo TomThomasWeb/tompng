@@ -85,7 +85,7 @@ export default async function PostPage({ params }: Props) {
       {/* Body */}
       <article className="prose-custom">
         {paragraphs.length > 0 ? (
-          paragraphs.map((para, i) => (
+          paragraphs.map((para: string, i) => (
             <p
               key={i}
               className="text-[16px] leading-[1.8] mb-6"

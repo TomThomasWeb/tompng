@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { TiltCard } from '../TiltCard'
+import { Icon } from '../Icon'
 import type { Album } from '@/types'
 
 interface AlbumsTileProps {
@@ -10,7 +11,7 @@ interface AlbumsTileProps {
 
 function VinylDisc({ color }: { color: string }) {
   return (
-    <svg width="52" height="52" viewBox="0 0 52 52" className="vinyl-spinning">
+    <svg width="48" height="48" viewBox="0 0 52 52" className="vinyl-spinning">
       <circle cx="26" cy="26" r="25" fill="#111" stroke="#222" strokeWidth="1" />
       <circle cx="26" cy="26" r="20" fill="none" stroke="#1a1a1a" strokeWidth="2" />
       <circle cx="26" cy="26" r="15" fill="none" stroke="#1a1a1a" strokeWidth="1.5" />
@@ -46,9 +47,12 @@ export function AlbumsTile({ albums }: AlbumsTileProps) {
       onMouseLeave={() => setHovering(false)}
     >
       <div className="flex items-center justify-between mb-3">
-        <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>
-          Fav albums
-        </p>
+        <div className="flex items-center gap-1.5">
+          <Icon name="vinyl" size={10} style={{ color: 'var(--text-subtle)' }} />
+          <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+            Fav albums
+          </p>
+        </div>
         {hovering && (
           <div className="flex items-center gap-2">
             <VinylDisc color={activeAlbum?.color_swatch ?? '#4a7c5f'} />
@@ -65,12 +69,8 @@ export function AlbumsTile({ albums }: AlbumsTileProps) {
               style={{ background: album.color_swatch, border: '1px solid rgba(255,255,255,0.06)' }}
             />
             <div className="min-w-0">
-              <p className="text-[11px] truncate" style={{ color: 'var(--text)' }}>
-                {album.title}
-              </p>
-              <p className="text-[10px]" style={{ color: 'var(--text-subtle)' }}>
-                {album.artist}
-              </p>
+              <p className="text-[11px] truncate" style={{ color: 'var(--text)' }}>{album.title}</p>
+              <p className="text-[10px]" style={{ color: 'var(--text-subtle)' }}>{album.artist}</p>
             </div>
           </div>
         ))}

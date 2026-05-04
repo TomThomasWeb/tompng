@@ -12,6 +12,7 @@ export interface Game {
   name: string
   dominant_color: string
   note?: string
+  image_url?: string
 }
 
 export interface Album {
