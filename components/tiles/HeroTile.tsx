@@ -32,7 +32,7 @@ export function HeroTile({ bio }: HeroTileProps) {
 
   return (
     <TiltCard
-      className="tile col-span-2 row-span-2 p-6 flex flex-col justify-between overflow-visible"
+      className="tile col-span-4 row-span-2 p-6 flex flex-col justify-between overflow-visible"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       style={{ position: 'relative' }}

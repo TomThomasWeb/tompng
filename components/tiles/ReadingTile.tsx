@@ -10,7 +10,7 @@ const STATUS_STYLES = {
 
 export function ReadingTile({ books }: { books: BookItem[] }) {
   return (
-    <TiltCard className="tile col-span-2 p-5 flex flex-col overflow-hidden">
+    <TiltCard className="tile col-span-4 p-5 flex flex-col overflow-hidden">
       <div className="flex items-center gap-1.5 mb-3">
         <Icon name="book" size={11} style={{ color: 'var(--text-subtle)' }} />
         <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>

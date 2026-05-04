@@ -24,7 +24,7 @@ const FIELDS: { key: keyof NowContent; label: string; icon: IconName }[] = [
 export function NowTile({ now }: { now: NowContent }) {
   const time = useCongleton()
   return (
-    <TiltCard className="tile col-span-1 p-5 flex flex-col overflow-hidden" id="now">
+    <TiltCard className="tile col-span-2 p-5 flex flex-col overflow-hidden" id="now">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-1.5">
           <Icon name="clock" size={11} style={{ color: 'var(--text-subtle)' }} />

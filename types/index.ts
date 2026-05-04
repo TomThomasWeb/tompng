@@ -98,4 +98,5 @@ export interface SiteData {
   }
   mood: MoodContent
   books: BookItem[]
+  quote: { text: string; author: string }
 }

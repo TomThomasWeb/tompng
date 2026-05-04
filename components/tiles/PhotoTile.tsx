@@ -45,7 +45,7 @@ export function PhotoTile({ photos }: PhotoTileProps) {
   return (
     <>
       <TiltCard
-        className="tile col-span-2 row-span-2 overflow-hidden relative cursor-pointer"
+        className="tile col-span-4 row-span-2 overflow-hidden relative cursor-pointer"
         id="photos"
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}

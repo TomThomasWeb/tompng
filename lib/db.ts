@@ -53,6 +53,7 @@ export async function getSiteData(): Promise<SiteData> {
       } : siteData.social,
       mood:  siteData.mood,
       books: siteData.books,
+      quote: siteData.quote,
     }
   } catch {
     // If Supabase isn't configured, return static data

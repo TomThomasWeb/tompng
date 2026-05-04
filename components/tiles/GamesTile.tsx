@@ -23,7 +23,7 @@ export function GamesTile({ games }: { games: Game[] }) {
 
   return (
     <TiltCard
-      className="tile col-span-2 p-5 overflow-hidden"
+      className="tile col-span-4 p-5 overflow-hidden"
       style={{ backgroundColor: hovered !== null ? hexToRgba(games[hovered]?.dominant_color ?? '#4a7c5f', 0.1) : 'var(--surface)', transition: 'background-color 0.3s ease' } as React.CSSProperties}
     >
       <div className="flex items-center gap-1.5 mb-3">

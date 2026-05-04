@@ -171,8 +171,13 @@ export const siteData: SiteData = {
   },
 
   books: [
-    { id: '1', title: 'Fractured Healer', author: 'Chris Norris', status: 'reading', display_order: 1 },
-    { id: '2', title: 'Your Next Book', author: 'Author Name', status: 'want', display_order: 2 },
-    { id: '3', title: 'A Finished Read', author: 'Author Name', status: 'done', display_order: 3 },
+    { id: '1', title: 'Fractured Healer', author: 'Chris Norris', status: 'reading' as const, display_order: 1 },
+    { id: '2', title: 'Your Next Book', author: 'Author Name', status: 'want' as const, display_order: 2 },
+    { id: '3', title: 'A Finished Read', author: 'Author Name', status: 'done' as const, display_order: 3 },
   ],
+
+  quote: {
+    text: 'The best time to plant a tree was 20 years ago. The second best time is now.',
+    author: 'Chinese proverb',
+  },
 }

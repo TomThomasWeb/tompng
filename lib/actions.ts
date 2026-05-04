@@ -220,3 +220,18 @@ export async function updatePhotoMeta(id: string, caption: string, location: str
   revalidatePath('/')
 
 }
+
+// ─── Visitor counter ──────────────────────────────────────
+
+export async function incrementAndGetVisitorCount(): Promise<number> {
+  const sb = await createSupabaseServerClient()
+  const { data: current } = await sb.from('visit_counts').select('id, count').single()
+  if (current) {
+    const newCount = (current.count ?? 0) + 1
+    await sb.from('visit_counts').update({ count: newCount }).eq('id', current.id)
+    return newCount
+  } else {
+    await sb.from('visit_counts').insert({ count: 1 })
+    return 1
+  }
+}
