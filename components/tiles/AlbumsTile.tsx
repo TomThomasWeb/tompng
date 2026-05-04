@@ -79,8 +79,8 @@ export function AlbumsTile({ albums }: AlbumsTileProps) {
               }}
             />
             <div className="min-w-0">
-              <p className="text-[13px] font-medium truncate" style={{ color: 'var(--text)' }}>{album.title}</p>
-              <p className="text-[11px]" style={{ color: 'var(--text-subtle)' }}>{album.artist}</p>
+              <p className="text-[14px] font-medium truncate" style={{ color: 'var(--text)' }}>{album.title}</p>
+              <p className="text-[12px]" style={{ color: 'var(--text-subtle)' }}>{album.artist}</p>
             </div>
           </div>
         ))}

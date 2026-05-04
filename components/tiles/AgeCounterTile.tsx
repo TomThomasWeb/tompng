@@ -1,32 +1,37 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { TiltCard } from '../TiltCard'
+import { SmallTile } from '../SmallTile'
 
-// Born 31 May 1999 at 2:38 AM BST = 01:38 UTC
 const BIRTH = new Date('1999-05-31T01:38:00Z')
 
 function getAge() {
-  const now = new Date()
-  const ms = now.getTime() - BIRTH.getTime()
-  const totalDays = Math.floor(ms / 86400000)
-  const years = Math.floor(totalDays / 365.25)
-  const days = Math.floor(totalDays - years * 365.25)
-  return { years, days }
+  const ms = Date.now() - BIRTH.getTime()
+  const days = Math.floor(ms / 86400000)
+  const years = Math.floor(days / 365.25)
+  const rem = Math.floor(days - years * 365.25)
+  return { years, days: rem }
 }
 
 export function AgeCounterTile() {
   const [age, setAge] = useState(getAge)
-
   useEffect(() => {
     const t = setInterval(() => setAge(getAge()), 60000)
     return () => clearInterval(t)
   }, [])
 
   return (
-    <TiltCard className="tile col-span-1 flex flex-col items-center justify-center gap-1 overflow-hidden">
-      <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>Age</p>
-      <p className="text-[34px] font-bold tabular-nums leading-none" style={{ color: 'var(--text)' }}>{age.years}</p>
-      <p className="text-[10px]" style={{ color: 'var(--text-muted)' }}>{age.days}d</p>
-    </TiltCard>
+    <SmallTile
+      accentBg="linear-gradient(160deg, var(--accent-bg) 0%, rgba(74,124,95,0.02) 100%)"
+      accentBorder="var(--accent-border)"
+    >
+      <div className="flex flex-col items-center justify-center h-full gap-0.5 p-2">
+        <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--accent)' }}>Age</p>
+        <p className="text-[40px] font-bold tabular-nums leading-none" style={{ color: 'var(--accent-text)' }}>
+          {age.years}
+        </p>
+        <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>years old</p>
+        <p className="text-[10px]" style={{ color: 'var(--text-subtle)' }}>{age.days}d</p>
+      </div>
+    </SmallTile>
   )
 }

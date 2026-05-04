@@ -1,19 +1,18 @@
 'use client'
-import { TiltCard } from '../TiltCard'
+import { SmallTile } from '../SmallTile'
 import { useTheme } from '../ThemeProvider'
 
 export function ThemeToggleTile() {
   const { theme, toggleTheme } = useTheme()
   const isDark = theme === 'dark'
   return (
-    <TiltCard
-      className="tile col-span-1 flex flex-col items-center justify-center gap-2 overflow-hidden cursor-pointer select-none"
-      onClick={toggleTheme}
-    >
-      <span style={{ fontSize: 28, lineHeight: 1 }}>{isDark ? '🌙' : '☀️'}</span>
-      <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>
-        {isDark ? 'Dark' : 'Light'}
-      </p>
-    </TiltCard>
+    <SmallTile onClick={toggleTheme}>
+      <div className="flex flex-col items-center justify-center h-full gap-1.5">
+        <span style={{ fontSize: 32, lineHeight: 1 }}>{isDark ? '🌙' : '☀️'}</span>
+        <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>
+          {isDark ? 'Dark' : 'Light'}
+        </p>
+      </div>
+    </SmallTile>
   )
 }

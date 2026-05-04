@@ -23,12 +23,12 @@ export function GamesTile({ games }: { games: Game[] }) {
 
   return (
     <TiltCard
-      className="tile col-span-4 p-5 overflow-hidden"
+      className="tile col-span-2 p-5 overflow-hidden"
       style={{ backgroundColor: hovered !== null ? hexToRgba(games[hovered]?.dominant_color ?? '#4a7c5f', 0.1) : 'var(--surface)', transition: 'background-color 0.3s ease' } as React.CSSProperties}
     >
       <div className="flex items-center gap-1.5 mb-3">
         <Icon name="gamepad" size={11} style={{ color: 'var(--text-subtle)' }} />
-        <p className="text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>Top games</p>
+        <p className="text-[12px] uppercase tracking-widest" style={{ color: 'var(--text-subtle)' }}>Top games</p>
       </div>
 
       {/* 2 columns × 3 rows of portrait art */}
@@ -58,7 +58,7 @@ export function GamesTile({ games }: { games: Game[] }) {
                 />
               )}
               <div className="min-w-0">
-                <p className="text-[12px] font-medium truncate leading-snug" style={{ color: 'var(--text)' }}>{game.name}</p>
+                <p className="text-[13px] font-medium truncate leading-snug" style={{ color: 'var(--text)' }}>{game.name}</p>
                 {game.platform && pc && (
                   <span className="text-[9px] px-1.5 py-0.5 rounded font-medium" style={{ background: pc.bg, color: pc.color }}>{game.platform}</span>
                 )}
