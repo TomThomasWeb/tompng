@@ -1,6 +1,6 @@
 import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { saveGearItem, deleteGearItem } from '@/lib/actions'
-import { SectionCard, FormField, SelectField, SaveButton, DangerButton } from '@/components/admin/FormFields'
+import { SectionCard, FormField, SelectField, SaveButton } from '@/components/admin/FormFields'
 import { siteData } from '@/lib/data'
 
 const BADGE_OPTIONS = [

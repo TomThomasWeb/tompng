@@ -1,26 +1,21 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
-import { savePhotoRecord, deletePhoto, updatePhotoMeta } from '@/lib/actions'
-
-// This page is a client component because photo upload requires
-// direct Supabase Storage calls from the browser
+import { savePhotoRecord, deletePhoto } from '@/lib/actions'
 
 export default function PhotosAdmin() {
-  const [photos, setPhotos] = useState<any[]>([])
-  const [loading, setLoading] = useState(false)
+  const [photos, setPhotos] = useState<{ id: string; url: string; caption: string; location: string }[]>([])
   const [uploading, setUploading] = useState(false)
   const [caption, setCaption] = useState('')
   const [location, setLocation] = useState('')
   const fileRef = useRef<HTMLInputElement>(null)
 
-  // Load photos on mount
-  useState(() => {
+  useEffect(() => {
     supabase.from('photos').select('*').order('display_order').then(({ data }) => {
       if (data) setPhotos(data)
     })
-  })
+  }, [])
 
   const handleUpload = async () => {
     const file = fileRef.current?.files?.[0]
@@ -61,7 +56,6 @@ export default function PhotosAdmin() {
     <div style={{ color: 'var(--text)' }}>
       <h1 className="text-[22px] font-semibold mb-6">Photography</h1>
 
-      {/* Upload */}
       <div className="rounded-xl p-6 mb-6" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
         <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--text-subtle)' }}>Upload photo</p>
         <div className="flex flex-col gap-3">
@@ -79,7 +73,6 @@ export default function PhotosAdmin() {
         </div>
       </div>
 
-      {/* Photo grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {photos.map((photo) => (
           <div key={photo.id} className="rounded-xl overflow-hidden" style={{ border: '1px solid var(--border)' }}>

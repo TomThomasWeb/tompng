@@ -29,7 +29,7 @@ export function TiltCard({ children, className, style, id, onMouseEnter, onMouse
     y.set((e.clientY - rect.top - rect.height / 2) / rect.height)
   }
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseLeave = () => {
     animate(x, 0, { type: 'spring', stiffness: 200, damping: 20 })
     animate(y, 0, { type: 'spring', stiffness: 200, damping: 20 })
     onMouseLeave?.()
