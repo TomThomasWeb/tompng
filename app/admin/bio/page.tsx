@@ -1,6 +1,6 @@
 import { createSupabaseServerClient } from '@/lib/supabase-server'
 import { saveBio } from '@/lib/actions'
-import { SectionCard, TextareaField, SaveButton } from '@/components/admin/FormFields'
+import { SectionCard, FormField, TextareaField, SaveButton } from '@/components/admin/FormFields'
 import { siteData } from '@/lib/data'
 
 export default async function BioAdmin() {
