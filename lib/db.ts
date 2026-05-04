@@ -51,6 +51,8 @@ export async function getSiteData(): Promise<SiteData> {
         github:    settings.github_url,
         linkedin:  settings.linkedin_url,
       } : siteData.social,
+      mood:  siteData.mood,
+      books: siteData.books,
     }
   } catch {
     // If Supabase isn't configured, return static data
