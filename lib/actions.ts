@@ -58,7 +58,8 @@ export async function saveGames(formData: FormData) {
     const note  = formData.get(`game_note_${i}`) as string
     if (!name) continue
     const image_url = formData.get(`game_image_${i}`) as string
-    const payload = { name, dominant_color: color || '#4a7c5f', note: note || '', image_url: image_url || '', display_order: i }
+    const platform  = formData.get(`game_platform_${i}`) as string
+    const payload = { name, dominant_color: color || '#4a7c5f', note: note || '', image_url: image_url || '', platform: platform || '', display_order: i }
     if (id) {
       await sb.from('games').upsert({ id, ...payload })
     } else {

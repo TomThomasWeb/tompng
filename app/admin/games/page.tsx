@@ -40,6 +40,12 @@ export default async function GamesAdmin() {
                 defaultValue={game?.image_url ?? ''}
                 placeholder="https://... (paste an image URL for the game cover)"
               />
+              <FormField
+                label="Platform"
+                name={`game_platform_${i}`}
+                defaultValue={game?.platform ?? ''}
+                placeholder="PC, PS5, Xbox, Switch..."
+              />
               <div className="mt-3">
                 <FormField
                   label="Note (optional)"

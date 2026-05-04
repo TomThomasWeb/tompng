@@ -32,11 +32,11 @@ export const siteData: SiteData = {
 
   games: [
     // Update with your actual top 5 and their dominant colours
-    { id: '1', display_order: 1, name: 'Your Game 1', dominant_color: '#4a7c5f', note: '' },
-    { id: '2', display_order: 2, name: 'Your Game 2', dominant_color: '#8b3a3a', note: '' },
-    { id: '3', display_order: 3, name: 'Your Game 3', dominant_color: '#3a5a8b', note: '' },
-    { id: '4', display_order: 4, name: 'Your Game 4', dominant_color: '#7a5a2a', note: '' },
-    { id: '5', display_order: 5, name: 'Your Game 5', dominant_color: '#5a3a7a', note: '' },
+    { id: '1', display_order: 1, name: 'Your Game 1', dominant_color: '#4a7c5f', note: '', platform: 'PC' },
+    { id: '2', display_order: 2, name: 'Your Game 2', dominant_color: '#8b3a3a', note: '', platform: 'PS5' },
+    { id: '3', display_order: 3, name: 'Your Game 3', dominant_color: '#3a5a8b', note: '', platform: 'PC' },
+    { id: '4', display_order: 4, name: 'Your Game 4', dominant_color: '#7a5a2a', note: '', platform: 'Switch' },
+    { id: '5', display_order: 5, name: 'Your Game 5', dominant_color: '#5a3a7a', note: '', platform: 'PC' },
   ],
 
   albums: [

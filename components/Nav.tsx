@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from './ThemeProvider'
+import { ThemeToggle } from './ThemeToggle'
 
 const navLinks = [
   { label: 'photos',  href: '#photos'   },
@@ -109,7 +110,6 @@ function FireNationOverlay({ onDone }: { onDone: () => void }) {
 }
 
 export function Nav() {
-  const { theme, toggleTheme } = useTheme()
   const [fireNation, setFireNation] = useState(false)
   const clickCount = useRef(0)
   const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -158,17 +158,7 @@ export function Nav() {
             </a>
           ))}
 
-          <button
-            onClick={toggleTheme}
-            className="text-[11px] px-3 py-1 rounded-full border transition-all duration-150 hover:opacity-80"
-            style={{
-              color: 'var(--accent-text)',
-              background: 'var(--accent-bg)',
-              borderColor: 'var(--accent-border)',
-            }}
-          >
-            {theme === 'dark' ? '◑ light' : '◑ dark'}
-          </button>
+          <ThemeToggle />
         </div>
       </motion.nav>
 
