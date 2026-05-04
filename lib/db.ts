@@ -57,3 +57,22 @@ export async function getSiteData(): Promise<SiteData> {
     return siteData
   }
 }
+
+export async function getMoodAndBooks() {
+  try {
+    const sb = await createSupabaseServerClient()
+    const [{ data: mood }, { data: books }] = await Promise.all([
+      sb.from('mood_content').select('*').single(),
+      sb.from('books').select('*').order('display_order'),
+    ])
+    return {
+      mood: mood ?? { emoji: '🎯', status: 'Building things' },
+      books: books ?? [],
+    }
+  } catch {
+    return {
+      mood: { emoji: '🎯', status: 'Building things' },
+      books: [] as import('@/types').BookItem[],
+    }
+  }
+}

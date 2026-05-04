@@ -2,8 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from './ThemeProvider'
-import { ThemeToggle } from './ThemeToggle'
 
 const navLinks = [
   { label: 'photos',  href: '#photos'   },
@@ -157,11 +155,8 @@ export function Nav() {
               {label}
             </a>
           ))}
-
-          <ThemeToggle />
         </div>
       </motion.nav>
-
       <AnimatePresence>
         {fireNation && (
           <FireNationOverlay onDone={() => setFireNation(false)} />

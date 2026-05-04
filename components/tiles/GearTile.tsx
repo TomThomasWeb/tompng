@@ -52,7 +52,7 @@ export function GearTile({ gear }: GearTileProps) {
 
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  <p className="text-[11px] font-medium" style={{ color: 'var(--text)' }}>
+                  <p className="text-[12px] font-medium" style={{ color: 'var(--text)' }}>
                     {item.model}
                   </p>
                   <span
@@ -62,7 +62,7 @@ export function GearTile({ gear }: GearTileProps) {
                     {item.verdict_badge}
                   </span>
                 </div>
-                <p className="text-[10px]" style={{ color: 'var(--text-subtle)' }}>
+                <p className="text-[11px]" style={{ color: 'var(--text-subtle)' }}>
                   {item.brand}
                 </p>
               </div>

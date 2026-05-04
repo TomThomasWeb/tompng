@@ -1,4 +1,5 @@
 import { getSiteData } from '@/lib/db'
+import { getMoodAndBooks } from '@/lib/db'
 import { Nav } from '@/components/Nav'
 import { HeroTile } from '@/components/tiles/HeroTile'
 import { PhotoTile } from '@/components/tiles/PhotoTile'
@@ -7,54 +8,63 @@ import { AlbumsTile } from '@/components/tiles/AlbumsTile'
 import { NowTile } from '@/components/tiles/NowTile'
 import { GearTile } from '@/components/tiles/GearTile'
 import { FreelanceTile } from '@/components/tiles/FreelanceTile'
-import { WritingTile } from '@/components/tiles/WritingTile'
+import { WeatherTile } from '@/components/tiles/WeatherTile'
+import { MoodTile } from '@/components/tiles/MoodTile'
+import { ReadingTile } from '@/components/tiles/ReadingTile'
+import { ThemeToggleTile } from '@/components/tiles/ThemeToggleTile'
 import { BentoGrid } from '@/components/BentoGrid'
+import type { WeatherData } from '@/types'
+
+export const revalidate = 1800
+
+async function fetchWeather(): Promise<WeatherData | null> {
+  try {
+    const res = await fetch(
+      'https://api.open-meteo.com/v1/forecast?latitude=53.1635&longitude=-2.2160&current_weather=true',
+      { next: { revalidate: 1800 } }
+    )
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.current_weather ?? null
+  } catch {
+    return null
+  }
+}
 
 export default async function Home() {
-  const { bio, photos, games, albums, now, gear, freelance, posts, social } = await getSiteData()
+  const [siteData, { mood, books }, weather] = await Promise.all([
+    getSiteData(),
+    getMoodAndBooks(),
+    fetchWeather(),
+  ])
+
+  const { bio, photos, games, albums, now, gear, freelance } = siteData
 
   return (
     <main
-      className="min-h-screen px-5 py-8 md:px-8 md:py-10 lg:px-12"
+      className="flex flex-col px-4 py-4 md:px-6 md:py-5 lg:px-10 md:h-dvh md:overflow-hidden"
       style={{ perspective: '1200px' }}
     >
       <Nav />
-
-      <BentoGrid>
-        <HeroTile bio={bio} />
-        <PhotoTile photos={photos} />
-        <GamesTile games={games} />
-        <AlbumsTile albums={albums} />
-        <NowTile now={now} />
-        <GearTile gear={gear} />
-        <FreelanceTile freelance={freelance} />
-        <WritingTile posts={posts} />
-      </BentoGrid>
-
-      {/* Footer */}
-      <footer className="mt-6 pt-4 flex justify-between items-center" style={{ borderTop: '1px solid var(--border)' }}>
-        <span className="text-[10px]" style={{ color: 'var(--text-subtle)' }}>
-          tompng.co.uk
-        </span>
-        <div className="flex gap-4">
-          {[
-            { label: 'Instagram', href: social.instagram },
-            { label: 'GitHub', href: social.github },
-            { label: 'LinkedIn', href: social.linkedin },
-          ].map(({ label, href }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[10px] hover:opacity-60 transition-opacity"
-              style={{ color: 'var(--text-subtle)' }}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
-      </footer>
+      <div className="flex-1 min-h-0">
+        <BentoGrid>
+          {/* Row 1-2 */}
+          <HeroTile bio={bio} />
+          <PhotoTile photos={photos} />
+          {/* Row 3 */}
+          <GamesTile games={games} />
+          <AlbumsTile albums={albums} />
+          <NowTile now={now} />
+          {/* Row 4 */}
+          <WeatherTile weather={weather} />
+          <MoodTile mood={mood} />
+          <ReadingTile books={books} />
+          {/* Row 5 */}
+          <GearTile gear={gear} />
+          <FreelanceTile freelance={freelance} />
+          <ThemeToggleTile />
+        </BentoGrid>
+      </div>
     </main>
   )
 }

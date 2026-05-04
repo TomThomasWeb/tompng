@@ -14,6 +14,8 @@ const NAV_ITEMS = [
   { href: '/admin/gear',      label: 'Gear',         icon: '◫' },
   { href: '/admin/freelance', label: 'Tom Thomas',   icon: '◐' },
   { href: '/admin/writing',   label: 'Writing',      icon: '◧' },
+  { href: '/admin/mood',      label: 'Mood',         icon: '◉' },
+  { href: '/admin/reading',   label: 'Reading',      icon: '◫' },
   { href: '/admin/settings',  label: 'Settings',     icon: '◌' },
 ]
 

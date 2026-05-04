@@ -37,6 +37,7 @@ export const siteData: SiteData = {
     { id: '3', display_order: 3, name: 'Your Game 3', dominant_color: '#3a5a8b', note: '', platform: 'PC' },
     { id: '4', display_order: 4, name: 'Your Game 4', dominant_color: '#7a5a2a', note: '', platform: 'Switch' },
     { id: '5', display_order: 5, name: 'Your Game 5', dominant_color: '#5a3a7a', note: '', platform: 'PC' },
+    { id: '6', display_order: 6, name: 'Your Game 6', dominant_color: '#3a2a5a', note: '', platform: 'Xbox' },
   ],
 
   albums: [
@@ -163,4 +164,15 @@ export const siteData: SiteData = {
     github: 'https://github.com/',
     linkedin: 'https://linkedin.com/in/',
   },
+
+  mood: {
+    emoji: '🎯',
+    status: 'Building things',
+  },
+
+  books: [
+    { id: '1', title: 'Fractured Healer', author: 'Chris Norris', status: 'reading', display_order: 1 },
+    { id: '2', title: 'Your Next Book', author: 'Author Name', status: 'want', display_order: 2 },
+    { id: '3', title: 'A Finished Read', author: 'Author Name', status: 'done', display_order: 3 },
+  ],
 }

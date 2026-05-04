@@ -52,6 +52,27 @@ export interface Post {
   published_at: string
 }
 
+export interface MoodContent {
+  emoji: string
+  status: string
+  updated_at?: string
+}
+
+export interface BookItem {
+  id: string
+  title: string
+  author: string
+  status: 'reading' | 'want' | 'done'
+  display_order: number
+}
+
+export interface WeatherData {
+  temperature: number
+  weathercode: number
+  windspeed: number
+  is_day: number
+}
+
 export interface SiteData {
   bio: {
     one_liners: string[]
@@ -75,4 +96,6 @@ export interface SiteData {
     github: string
     linkedin: string
   }
+  mood: MoodContent
+  books: BookItem[]
 }

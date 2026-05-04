@@ -145,3 +145,12 @@ body {
 .contact-photo-enter {
   animation: contact-fade 0.15s ease;
 }
+
+/* ─── Viewport-fill bento grid ────────────────────────── */
+
+@media (min-width: 768px) {
+  .bento-fill {
+    grid-template-rows: repeat(5, 1fr);
+    height: 100%;
+  }
+}
