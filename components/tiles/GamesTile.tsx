@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { TiltCard } from '../TiltCard'
+import { GrowCard } from '../GrowCard'
 import { Icon } from '../Icon'
 import type { Game } from '@/types'
 
@@ -21,7 +21,7 @@ export function GamesTile({ games }: { games: Game[] }) {
   const [hovered, setHovered] = useState<number | null>(null)
 
   return (
-    <TiltCard
+    <GrowCard
       className="tile flex flex-col"
       style={{ gridColumn: '6 / 9', gridRow: '1 / 3', backgroundColor: hovered !== null ? hexToRgba(games[hovered]?.dominant_color ?? '#4a7c5f', 0.1) : 'var(--surface)', transition: 'background-color 0.3s ease' } as React.CSSProperties}
     >
@@ -55,6 +55,6 @@ export function GamesTile({ games }: { games: Game[] }) {
           })}
         </div>
       </div>
-    </TiltCard>
+    </GrowCard>
   )
 }

@@ -32,7 +32,7 @@ export async function getSiteData(): Promise<SiteData> {
 
     return {
       bio: bio
-        ? { one_liners: bio.one_liners, short_bio: bio.bio_text, profile_image: bio.profile_image ?? '' }
+        ? { one_liners: bio.one_liners, short_bio: bio.bio_text, profile_image: bio.profile_image ?? '', fun_facts: bio.fun_facts ?? [] }
         : siteData.bio,
       photos:   photos?.length   ? photos   : siteData.photos,
       games:    games?.length    ? games    : siteData.games,

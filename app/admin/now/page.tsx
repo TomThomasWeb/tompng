@@ -6,7 +6,7 @@ import { siteData } from '@/lib/data'
 export default async function NowAdmin() {
   const sb = await createSupabaseServerClient()
   const { data } = await sb.from('now_content').select('*').single()
-  const now = data ?? siteData.now
+  const now = data ?? { ...siteData.now, location: '', next_event: '' }
 
   return (
     <div>
@@ -18,6 +18,8 @@ export default async function NowAdmin() {
             <FormField label="Reading"      name="reading"      defaultValue={now.reading} />
             <FormField label="Learning"     name="learning"     defaultValue={now.learning} />
             <FormField label="Shooting with" name="shooting_with" defaultValue={now.shooting_with} />
+            <FormField label="Location"     name="location"     defaultValue={now.location ?? ''} placeholder="e.g. Congleton, Cheshire" />
+            <FormField label="Next event"   name="next_event"   defaultValue={now.next_event ?? ''} placeholder="e.g. Fencing club, 7pm Thursday" />
           </div>
         </SectionCard>
         <div><SaveButton /></div>

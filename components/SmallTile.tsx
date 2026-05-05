@@ -1,4 +1,5 @@
 'use client'
+import { GrowCard } from './GrowCard'
 import { TiltCard } from './TiltCard'
 
 interface SmallTileProps {
@@ -8,23 +9,32 @@ interface SmallTileProps {
   accentBorder?: string
   gridColumn: string
   gridRow: string
+  cardType?: 'tilt' | 'grow'
 }
 
-export function SmallTile({ children, onClick, accentBg, accentBorder, gridColumn, gridRow }: SmallTileProps) {
+export function SmallTile({ children, onClick, accentBg, accentBorder, gridColumn, gridRow, cardType = 'grow' }: SmallTileProps) {
+  const sharedStyle = {
+    gridColumn,
+    gridRow,
+    background:  accentBg     ?? 'var(--glass-bg)',
+    borderColor: accentBorder ?? 'var(--glass-border)',
+    boxShadow:   'var(--glass-shadow)',
+    cursor: onClick ? 'pointer' : undefined,
+  }
+
+  const sharedClass = "tile flex flex-col overflow-hidden"
+
+  if (cardType === 'tilt') {
+    return (
+      <TiltCard className={sharedClass} onClick={onClick} style={sharedStyle}>
+        {children}
+      </TiltCard>
+    )
+  }
+
   return (
-    <TiltCard
-      className="tile flex flex-col overflow-hidden"
-      onClick={onClick}
-      style={{
-        gridColumn,
-        gridRow,
-        background:  accentBg     ?? 'var(--glass-bg)',
-        borderColor: accentBorder ?? 'var(--glass-border)',
-        boxShadow:   'var(--glass-shadow)',
-        cursor: onClick ? 'pointer' : undefined,
-      }}
-    >
+    <GrowCard className={sharedClass} onClick={onClick} style={sharedStyle}>
       {children}
-    </TiltCard>
+    </GrowCard>
   )
 }

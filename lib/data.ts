@@ -18,6 +18,11 @@ export const siteData: SiteData = {
     short_bio:
       "Photographer, web designer, and general creative. I work at Alps by day and build things the rest of the time.",
     profile_image: '',
+    fun_facts: [
+      'Cat dad to Zuko and Azula',
+      'Competitive fencer',
+      'Learning piano (slowly)',
+    ],
   },
 
   photos: [
@@ -52,6 +57,8 @@ export const siteData: SiteData = {
     reading: 'Fractured Healer — Chris Norris',
     learning: 'Piano (slowly)',
     shooting_with: 'DJI Osmo Pocket 3',
+    location: 'Congleton, Cheshire',
+    next_event: '',
   },
 
   gear: [

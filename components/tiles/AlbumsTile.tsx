@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { TiltCard } from '../TiltCard'
+import { StaticCard } from '../StaticCard'
 import { Icon } from '../Icon'
 import type { Album } from '@/types'
 
@@ -17,7 +17,7 @@ export function AlbumsTile({ albums }: { albums: Album[] }) {
   const [hovering, setHovering] = useState(false)
 
   return (
-    <TiltCard
+    <StaticCard
       className="tile flex flex-col"
       style={{ gridColumn:'6 / 9', gridRow:'3 / 5', position:'relative', overflow:'visible' } as React.CSSProperties}
       onMouseEnter={() => setHovering(true)}
@@ -53,6 +53,6 @@ export function AlbumsTile({ albums }: { albums: Album[] }) {
           ))}
         </div>
       </div>
-    </TiltCard>
+    </StaticCard>
   )
 }

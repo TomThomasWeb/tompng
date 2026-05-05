@@ -29,6 +29,8 @@ export interface NowContent {
   reading: string
   learning: string
   shooting_with: string
+  location?: string
+  next_event?: string
 }
 
 export type VerdictBadge = 'daily driver' | 'weekend kit' | 'new arrival' | 'in the bag'
@@ -78,6 +80,7 @@ export interface SiteData {
     one_liners: string[]
     short_bio: string
     profile_image?: string
+    fun_facts?: string[]
   }
   photos: Photo[]
   games: Game[]

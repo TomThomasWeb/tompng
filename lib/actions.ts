@@ -11,12 +11,14 @@ export async function saveBio(formData: FormData) {
   const one_liners_raw = formData.get('one_liners') as string
   const one_liners = one_liners_raw.split('\n').map((s) => s.trim()).filter(Boolean)
   const profile_image = formData.get('profile_image') as string
+  const fun_facts_raw = formData.get('fun_facts') as string
+  const fun_facts = fun_facts_raw.split('\n').map((s) => s.trim()).filter(Boolean)
 
   const { data: existing } = await sb.from('bio_content').select('id').single()
   if (existing) {
-    await sb.from('bio_content').update({ bio_text, one_liners, profile_image, updated_at: new Date().toISOString() }).eq('id', existing.id)
+    await sb.from('bio_content').update({ bio_text, one_liners, profile_image, fun_facts, updated_at: new Date().toISOString() }).eq('id', existing.id)
   } else {
-    await sb.from('bio_content').insert({ bio_text, one_liners, profile_image })
+    await sb.from('bio_content').insert({ bio_text, one_liners, profile_image, fun_facts })
   }
   revalidatePath('/')
 
@@ -31,6 +33,8 @@ export async function saveNow(formData: FormData) {
     reading:      formData.get('reading') as string,
     learning:     formData.get('learning') as string,
     shooting_with: formData.get('shooting_with') as string,
+    location:     formData.get('location') as string,
+    next_event:   formData.get('next_event') as string,
     updated_at:   new Date().toISOString(),
   }
   const { data: existing } = await sb.from('now_content').select('id').single()

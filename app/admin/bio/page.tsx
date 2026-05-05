@@ -6,7 +6,7 @@ import { siteData } from '@/lib/data'
 export default async function BioAdmin() {
   const sb = await createSupabaseServerClient()
   const { data } = await sb.from('bio_content').select('*').single()
-  const bio = data ?? { bio_text: siteData.bio.short_bio, one_liners: siteData.bio.one_liners }
+  const bio = data ?? { bio_text: siteData.bio.short_bio, one_liners: siteData.bio.one_liners, profile_image: '', fun_facts: [] as string[] }
 
   return (
     <div>
@@ -35,6 +35,15 @@ export default async function BioAdmin() {
             defaultValue={bio.one_liners.join('\n')}
             rows={8}
             hint="One per line — these cycle in the hero tile every 4 seconds."
+          />
+        </SectionCard>
+        <SectionCard title="Fun facts">
+          <TextareaField
+            label="Fun facts"
+            name="fun_facts"
+            defaultValue={(bio.fun_facts ?? []).join('\n')}
+            rows={5}
+            hint="One per line — shown as bullet points in the hero tile."
           />
         </SectionCard>
         <div><SaveButton /></div>
