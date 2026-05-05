@@ -101,6 +101,8 @@ export interface SiteData {
     instagram: string
     github: string
     linkedin: string
+    whatsapp?: string
+    facebook?: string
   }
   mood: MoodContent
   books: BookItem[]

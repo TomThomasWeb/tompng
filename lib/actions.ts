@@ -54,28 +54,27 @@ export async function saveGames(formData: FormData) {
   const count = Number(formData.get('count') ?? 6)
 
   for (let i = 0; i < count; i++) {
-    const id       = formData.get(`game_id_${i}`) as string
-    const name     = formData.get(`game_name_${i}`) as string
-    const color    = formData.get(`game_color_${i}`) as string
-    const note     = formData.get(`game_note_${i}`) as string
+    const id        = formData.get(`game_id_${i}`) as string
+    const name      = formData.get(`game_name_${i}`) as string
+    const color     = formData.get(`game_color_${i}`) as string
+    const note      = formData.get(`game_note_${i}`) as string
     const image_url = formData.get(`game_image_${i}`) as string
     const platform  = formData.get(`game_platform_${i}`) as string
     if (!name) continue
-    const payload = {
-      name,
-      dominant_color: color || '#4a7c5f',
-      note: note || '',
-      image_url: image_url || '',
-      platform: platform || '',
-      display_order: i,
-    }
+
+    const fullPayload = { name, dominant_color: color || '#4a7c5f', note: note || '', image_url: image_url || '', platform: platform || '', display_order: i }
+    const basePayload = { name, dominant_color: color || '#4a7c5f', note: note || '', display_order: i }
+
     if (id) {
-      await sb.from('games').update(payload).eq('id', id)
+      const { error } = await sb.from('games').update(fullPayload).eq('id', id)
+      if (error) await sb.from('games').update(basePayload).eq('id', id)
     } else {
-      await sb.from('games').insert(payload)
+      const { error } = await sb.from('games').insert(fullPayload)
+      if (error) await sb.from('games').insert(basePayload)
     }
   }
   revalidatePath('/')
+  revalidatePath('/admin/games')
 }
 
 // ─── Albums ───────────────────────────────────────────────
@@ -90,20 +89,20 @@ export async function saveAlbums(formData: FormData) {
     const color     = formData.get(`album_color_${i}`) as string
     const image_url = formData.get(`album_image_${i}`) as string
     if (!title) continue
-    const payload = {
-      title,
-      artist,
-      color_swatch: color || '#1a1a2a',
-      image_url: image_url || '',
-      display_order: i,
-    }
+
+    const fullPayload = { title, artist, color_swatch: color || '#1a1a2a', image_url: image_url || '', display_order: i }
+    const basePayload = { title, artist, color_swatch: color || '#1a1a2a', display_order: i }
+
     if (id) {
-      await sb.from('albums').update(payload).eq('id', id)
+      const { error } = await sb.from('albums').update(fullPayload).eq('id', id)
+      if (error) await sb.from('albums').update(basePayload).eq('id', id)
     } else {
-      await sb.from('albums').insert(payload)
+      const { error } = await sb.from('albums').insert(fullPayload)
+      if (error) await sb.from('albums').insert(basePayload)
     }
   }
   revalidatePath('/')
+  revalidatePath('/admin/albums')
 }
 
 // ─── Gear ─────────────────────────────────────────────────
@@ -200,15 +199,22 @@ export async function saveSettings(formData: FormData) {
     instagram_url: formData.get('instagram_url') as string,
     github_url:    formData.get('github_url') as string,
     linkedin_url:  formData.get('linkedin_url') as string,
+    whatsapp_url:  formData.get('whatsapp_url') as string,
+    facebook_url:  formData.get('facebook_url') as string,
   }
   const { data: existing } = await sb.from('site_settings').select('id').single()
   if (existing) {
-    await sb.from('site_settings').update(payload).eq('id', existing.id)
+    // Try with all fields, fall back to original fields if new columns don't exist yet
+    const { error } = await sb.from('site_settings').update(payload).eq('id', existing.id)
+    if (error) {
+      const { instagram_url, github_url, linkedin_url } = payload
+      await sb.from('site_settings').update({ instagram_url, github_url, linkedin_url }).eq('id', existing.id)
+    }
   } else {
     await sb.from('site_settings').insert(payload)
   }
   revalidatePath('/')
-
+  revalidatePath('/admin/settings')
 }
 
 // ─── Photos ───────────────────────────────────────────────

@@ -35,15 +35,15 @@ export function AgeCounterTile() {
       accentBorder="var(--accent-border)">
       <div className="flex flex-col items-center justify-center h-full gap-0.5 px-1">
         <p className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--accent)' }}>I am</p>
-        <p className="text-[34px] font-bold tabular-nums leading-none" style={{ color: 'var(--accent-text)' }}>
+        <p className="text-[42px] font-bold tabular-nums leading-none" style={{ color: 'var(--accent-text)' }}>
           {age.years}
         </p>
         <div className="flex items-center gap-1.5 flex-wrap justify-center">
-          <span className="text-[10px] tabular-nums" style={{ color: 'var(--text-muted)' }}>{age.months}m</span>
+          <span className="text-[11px] tabular-nums" style={{ color: 'var(--text-muted)' }}>{age.months}m</span>
           <span className="text-[9px]" style={{ color: 'var(--border)' }}>·</span>
-          <span className="text-[10px] tabular-nums" style={{ color: 'var(--text-muted)' }}>{age.days}d</span>
+          <span className="text-[11px] tabular-nums" style={{ color: 'var(--text-muted)' }}>{age.days}d</span>
           <span className="text-[9px]" style={{ color: 'var(--border)' }}>·</span>
-          <span className="text-[10px] tabular-nums" style={{ color: 'var(--text-muted)' }}>{age.hours}h</span>
+          <span className="text-[11px] tabular-nums" style={{ color: 'var(--text-muted)' }}>{age.hours}h</span>
         </div>
         <p className="text-[10px]" style={{ color: 'var(--text-subtle)' }}>old</p>
       </div>

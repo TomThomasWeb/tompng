@@ -12,10 +12,10 @@ export function VisitorCounterTile() {
       accentBg="linear-gradient(160deg, rgba(60,160,80,0.12) 0%, rgba(60,160,80,0.02) 100%)"
       accentBorder="rgba(60,160,80,0.2)">
       <div className="flex flex-col items-center justify-center h-full gap-1 p-1">
-        <p className="text-[26px] font-bold tabular-nums leading-none" style={{ color: '#3ca050' }}>
+        <p className="text-[32px] font-bold tabular-nums leading-none" style={{ color: '#3ca050' }}>
           {count === null ? '—' : count.toLocaleString('en-GB')}
         </p>
-        <p className="text-[10px] text-center leading-tight" style={{ color: 'rgba(60,160,80,0.7)' }}>
+        <p className="text-[11px] text-center leading-tight font-semibold" style={{ color: 'rgba(60,160,80,0.7)' }}>
           Site Visitors!
         </p>
       </div>

@@ -172,6 +172,8 @@ export const siteData: SiteData = {
     instagram: 'https://instagram.com/',
     github: 'https://github.com/',
     linkedin: 'https://linkedin.com/in/',
+    whatsapp: '',
+    facebook: '',
   },
 
   mood: {

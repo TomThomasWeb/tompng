@@ -52,6 +52,8 @@ export async function getSiteData(): Promise<SiteData> {
         instagram: settings.instagram_url,
         github:    settings.github_url,
         linkedin:  settings.linkedin_url,
+        whatsapp:  settings.whatsapp_url ?? '',
+        facebook:  settings.facebook_url ?? '',
       } : siteData.social,
       mood:  siteData.mood,
       books: siteData.books,

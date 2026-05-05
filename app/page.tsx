@@ -48,7 +48,7 @@ export default async function Home() {
       <div className="flex-1 min-h-0">
         <BentoGrid>
           <HeroTile bio={bio} />
-          <SocialsTile social={{ instagram: social.instagram, linkedin: social.linkedin }} />
+          <SocialsTile social={{ instagram: social.instagram, linkedin: social.linkedin, whatsapp: social.whatsapp, facebook: social.facebook }} />
           <NowTile now={now} />
           <ThemeToggleTile />
           <WeatherTile weather={weather} />
