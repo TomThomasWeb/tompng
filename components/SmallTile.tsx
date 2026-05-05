@@ -6,16 +6,18 @@ interface SmallTileProps {
   onClick?: () => void
   accentBg?: string
   accentBorder?: string
+  gridColumn: string
+  gridRow: string
 }
 
-// Shared wrapper for all small (col-span-1) tiles
-// Applies the glass treatment as inline styles so it overrides .tile background
-export function SmallTile({ children, onClick, accentBg, accentBorder }: SmallTileProps) {
+export function SmallTile({ children, onClick, accentBg, accentBorder, gridColumn, gridRow }: SmallTileProps) {
   return (
     <TiltCard
-      className="tile col-span-1 flex flex-col overflow-hidden"
+      className="tile flex flex-col overflow-hidden"
       onClick={onClick}
       style={{
+        gridColumn,
+        gridRow,
         background:  accentBg     ?? 'var(--glass-bg)',
         borderColor: accentBorder ?? 'var(--glass-border)',
         boxShadow:   'var(--glass-shadow)',

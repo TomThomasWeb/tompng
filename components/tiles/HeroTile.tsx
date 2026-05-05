@@ -1,5 +1,4 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { TiltCard } from '../TiltCard'
@@ -11,10 +10,9 @@ interface HeroTileProps {
 const PILLS = ['Photography', 'Web Design', 'Gaming', 'Music', 'Fencing']
 
 const WAVES = [
-  { x: '18%', delay: 0,    size: 22 },
-  { x: '55%', delay: 0.3,  size: 18 },
-  { x: '80%', delay: 0.6,  size: 20 },
-  { x: '35%', delay: 0.9,  size: 16 },
+  { x: '15%', delay: 0,   size: 20 },
+  { x: '60%', delay: 0.4, size: 16 },
+  { x: '35%', delay: 0.8, size: 18 },
 ]
 
 export function HeroTile({ bio }: HeroTileProps) {
@@ -23,88 +21,77 @@ export function HeroTile({ bio }: HeroTileProps) {
   const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const t = setInterval(() => {
       setVisible(false)
       setTimeout(() => { setIndex(i => (i + 1) % bio.one_liners.length); setVisible(true) }, 280)
     }, 4000)
-    return () => clearInterval(interval)
+    return () => clearInterval(t)
   }, [bio.one_liners.length])
 
   return (
     <TiltCard
-      className="tile col-span-4 row-span-2 p-6 flex flex-col justify-between overflow-visible"
+      className="tile flex flex-col overflow-visible"
+      style={{ gridColumn: '1 / 3', gridRow: '1 / 6', position: 'relative' }}
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      style={{ position: 'relative' }}
     >
-      {/* Waving emoji hover effect */}
       <AnimatePresence>
         {hovering && WAVES.map((w, i) => (
-          <motion.span
-            key={i}
+          <motion.span key={i}
             initial={{ opacity: 0, y: 0 }}
-            animate={{ opacity: [0, 0.8, 0], y: -50, rotate: [0, -20, 20, -10, 0] }}
+            animate={{ opacity: [0, 0.9, 0], y: -45, rotate: [0, -20, 20, -10, 0] }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.6, delay: w.delay, repeat: Infinity, ease: 'easeOut' }}
-            style={{
-              position: 'absolute', left: w.x, bottom: '55%',
-              fontSize: w.size, pointerEvents: 'none', zIndex: 10,
-            }}
-          >
-            👋
-          </motion.span>
+            transition={{ duration: 1.6, delay: w.delay, repeat: Infinity }}
+            style={{ position: 'absolute', left: w.x, bottom: '40%', fontSize: w.size, pointerEvents: 'none', zIndex: 10 }}
+          >👋</motion.span>
         ))}
       </AnimatePresence>
 
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex-1 min-w-0">
-          <p className="text-[11px] uppercase tracking-widest mb-4" style={{ color: 'var(--accent)' }}>
-            Congleton, Cheshire, UK
-          </p>
-          <h1
-            className="text-[34px] font-bold leading-tight mb-3"
-            style={{ color: 'var(--text)', fontFamily: 'Georgia, serif' }}
-          >
-            Hey, I&apos;m Tom.
-          </h1>
-          <p className="text-[14px] leading-relaxed mb-3" style={{ color: 'var(--text-muted)', maxWidth: '280px' }}>
-            {bio.short_bio}
-          </p>
-          <motion.p
-            key={index}
-            animate={{ opacity: visible ? 1 : 0 }}
-            transition={{ duration: 0.28 }}
-            className="text-[13px]"
-            style={{ color: 'var(--text-subtle)' }}
-          >
-            {bio.one_liners[index]}
-          </motion.p>
+      <div className="flex flex-col h-full p-6 gap-4">
+        {/* Avatar — centred, prominent */}
+        <div className="flex justify-center pt-2">
+          {bio.profile_image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={bio.profile_image} alt="Tom Thomas"
+              style={{ width: 110, height: 110, borderRadius: 16, objectFit: 'cover', border: '2px solid var(--border)', boxShadow: '0 0 0 5px var(--accent-bg)' }} />
+          ) : (
+            <div style={{ width: 110, height: 110, borderRadius: 16, background: 'var(--accent-bg)', border: '2px solid var(--accent-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 36, fontWeight: 700, color: 'var(--accent-text)' }}>T</div>
+          )}
         </div>
 
-        {/* Square avatar with rounded corners */}
-        {bio.profile_image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={bio.profile_image}
-            alt="Tom Thomas"
-            className="flex-shrink-0 object-cover"
-            style={{ width: 96, height: 96, borderRadius: 12, border: '2px solid var(--border)', boxShadow: '0 0 0 4px var(--accent-bg)' }}
-          />
-        ) : (
-          <div
-            className="flex-shrink-0 flex items-center justify-center text-[28px] font-bold"
-            style={{ width: 96, height: 96, borderRadius: 12, background: 'var(--accent-bg)', border: '2px solid var(--accent-border)', color: 'var(--accent-text)' }}
-          >
-            T
-          </div>
-        )}
-      </div>
+        {/* Name */}
+        <div>
+          <p className="text-[11px] uppercase tracking-widest mb-2" style={{ color: 'var(--accent)' }}>
+            Congleton, Cheshire, UK
+          </p>
+          <h1 className="text-[30px] font-bold leading-tight mb-3" style={{ color: 'var(--text)', fontFamily: 'Georgia, serif' }}>
+            Hey, I&apos;m Tom.
+          </h1>
+          <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+            {bio.short_bio}
+          </p>
+        </div>
 
-      <div className="flex flex-wrap gap-2">
-        <span className="text-[11px] px-3 py-1 rounded-full border" style={{ color: 'var(--accent-text)', background: 'var(--accent-bg)', borderColor: 'var(--accent-border)' }}>Photography</span>
-        {PILLS.slice(1).map(p => (
-          <span key={p} className="text-[11px] px-3 py-1 rounded-full border" style={{ color: 'var(--text-subtle)', background: 'var(--divider)', borderColor: 'var(--border)' }}>{p}</span>
-        ))}
+        {/* Rotating one-liner */}
+        <motion.p key={index} animate={{ opacity: visible ? 1 : 0 }} transition={{ duration: 0.28 }}
+          className="text-[12px]" style={{ color: 'var(--text-subtle)', minHeight: '18px' }}>
+          {bio.one_liners[index]}
+        </motion.p>
+
+        {/* Spacer */}
+        <div className="flex-1" />
+
+        {/* Pills */}
+        <div className="flex flex-wrap gap-2">
+          <span className="text-[11px] px-3 py-1 rounded-full border" style={{ color: 'var(--accent-text)', background: 'var(--accent-bg)', borderColor: 'var(--accent-border)' }}>
+            Photography
+          </span>
+          {PILLS.slice(1).map(p => (
+            <span key={p} className="text-[11px] px-3 py-1 rounded-full border" style={{ color: 'var(--text-subtle)', background: 'var(--divider)', borderColor: 'var(--border)' }}>
+              {p}
+            </span>
+          ))}
+        </div>
       </div>
     </TiltCard>
   )

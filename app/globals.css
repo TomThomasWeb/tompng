@@ -151,7 +151,7 @@ body {
 @media (min-width: 768px) {
   .bento-fill {
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: 0.7fr 0.7fr 1.1fr 0.72fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
     height: 100%;
     grid-auto-rows: unset;
   }

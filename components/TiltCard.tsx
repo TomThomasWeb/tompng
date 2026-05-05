@@ -1,5 +1,4 @@
 'use client'
-
 import { useRef, useState, useEffect } from 'react'
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion'
 import clsx from 'clsx'
@@ -20,28 +19,22 @@ export function TiltCard({ children, className, style, id, onMouseEnter, onMouse
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const breatheScale = useMotionValue(1)
-
-  const rotateX = useTransform(y, [-0.5, 0.5], [6, -6])
-  const rotateY = useTransform(x, [-0.5, 0.5], [-6, 6])
-
-  // Stable random delay per tile — runs once on mount, client-only
   const [breatheDelay] = useState<number>(() => Math.random() * 5)
 
-  // Breathing scale — same element as tilt so no height/layout issues
+  const rotateX = useTransform(y, [-0.5, 0.5], [5, -5])
+  const rotateY = useTransform(x, [-0.5, 0.5], [-5, 5])
+
   useEffect(() => {
-    const controls = animate(breatheScale, [1, 1.003, 1], {
-      duration: 5,
-      repeat: Infinity,
-      ease: 'easeInOut',
-      delay: breatheDelay,
+    const c = animate(breatheScale, [1, 1.003, 1], {
+      duration: 5, repeat: Infinity, ease: 'easeInOut', delay: breatheDelay,
     })
-    return () => controls.stop()
+    return () => c.stop()
   }, [breatheDelay, breatheScale])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    x.set((e.clientX - rect.left - rect.width / 2) / rect.width)
-    y.set((e.clientY - rect.top - rect.height / 2) / rect.height)
+    const r = e.currentTarget.getBoundingClientRect()
+    x.set((e.clientX - r.left - r.width / 2) / r.width)
+    y.set((e.clientY - r.top - r.height / 2) / r.height)
   }
 
   const handleMouseLeave = () => {
@@ -55,7 +48,7 @@ export function TiltCard({ children, className, style, id, onMouseEnter, onMouse
       ref={ref}
       id={id}
       variants={tileVariants}
-      style={{ rotateX, rotateY, scale: breatheScale, transformStyle: 'preserve-3d', ...style }}
+      style={{ rotateX, rotateY, scale: breatheScale, transformStyle: 'preserve-3d', height: '100%', ...style }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={onMouseEnter}
