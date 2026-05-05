@@ -22,6 +22,7 @@ export interface Album {
   title: string
   artist: string
   color_swatch: string
+  image_url?: string
 }
 
 export interface NowContent {
@@ -92,6 +93,8 @@ export interface SiteData {
     services: string[]
     projects_count: number
     available: boolean
+    cta_url?: string
+    logo_url?: string
   }
   posts: Post[]
   social: {

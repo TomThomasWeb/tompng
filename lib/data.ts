@@ -134,6 +134,8 @@ export const siteData: SiteData = {
     services: ['Web Design', 'Video', 'Photography', 'Social Media', 'Marketing'],
     projects_count: 24,
     available: true,
+    cta_url: 'https://tomthomas.uk',
+    logo_url: '',
   },
 
   posts: [

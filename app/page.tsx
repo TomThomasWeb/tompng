@@ -13,7 +13,7 @@ import { AlbumsTile } from '@/components/tiles/AlbumsTile'
 import { AgeCounterTile } from '@/components/tiles/AgeCounterTile'
 import { VisitorCounterTile } from '@/components/tiles/VisitorCounterTile'
 import { MapTile } from '@/components/tiles/MapTile'
-import { ReadingTile } from '@/components/tiles/ReadingTile'
+import { FreelanceTile } from '@/components/tiles/FreelanceTile'
 import { BentoGrid } from '@/components/BentoGrid'
 import type { WeatherData } from '@/types'
 
@@ -31,13 +31,13 @@ async function fetchWeather(): Promise<WeatherData | null> {
 }
 
 export default async function Home() {
-  const [siteData, { mood, books }, weather] = await Promise.all([
+  const [siteData, { mood }, weather] = await Promise.all([
     getSiteData(),
     getMoodAndBooks(),
     fetchWeather(),
   ])
 
-  const { bio, photos, games, albums, now, social } = siteData
+  const { bio, photos, games, albums, now, social, freelance } = siteData
 
   return (
     <main
@@ -59,7 +59,7 @@ export default async function Home() {
           <AgeCounterTile />
           <VisitorCounterTile />
           <MapTile />
-          <ReadingTile books={books} />
+          <FreelanceTile freelance={freelance} />
         </BentoGrid>
       </div>
     </main>

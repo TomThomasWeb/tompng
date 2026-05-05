@@ -51,48 +51,59 @@ export async function saveNow(formData: FormData) {
 
 export async function saveGames(formData: FormData) {
   const sb = await createSupabaseServerClient()
-  const ids = (formData.get('ids') as string).split(',').filter(Boolean)
+  const count = Number(formData.get('count') ?? 6)
 
-  await sb.from('games').delete().not('id', 'in', `(${ids.map(() => '?').join(',')})`)
-
-  for (let i = 0; i < 5; i++) {
-    const id   = formData.get(`game_id_${i}`) as string
-    const name = formData.get(`game_name_${i}`) as string
-    const color = formData.get(`game_color_${i}`) as string
-    const note  = formData.get(`game_note_${i}`) as string
-    if (!name) continue
+  for (let i = 0; i < count; i++) {
+    const id       = formData.get(`game_id_${i}`) as string
+    const name     = formData.get(`game_name_${i}`) as string
+    const color    = formData.get(`game_color_${i}`) as string
+    const note     = formData.get(`game_note_${i}`) as string
     const image_url = formData.get(`game_image_${i}`) as string
     const platform  = formData.get(`game_platform_${i}`) as string
-    const payload = { name, dominant_color: color || '#4a7c5f', note: note || '', image_url: image_url || '', platform: platform || '', display_order: i }
+    if (!name) continue
+    const payload = {
+      name,
+      dominant_color: color || '#4a7c5f',
+      note: note || '',
+      image_url: image_url || '',
+      platform: platform || '',
+      display_order: i,
+    }
     if (id) {
-      await sb.from('games').upsert({ id, ...payload })
+      await sb.from('games').update(payload).eq('id', id)
     } else {
       await sb.from('games').insert(payload)
     }
   }
   revalidatePath('/')
-
 }
 
 // ─── Albums ───────────────────────────────────────────────
 
 export async function saveAlbums(formData: FormData) {
   const sb = await createSupabaseServerClient()
-  for (let i = 0; i < 3; i++) {
-    const id     = formData.get(`album_id_${i}`) as string
-    const title  = formData.get(`album_title_${i}`) as string
-    const artist = formData.get(`album_artist_${i}`) as string
-    const color  = formData.get(`album_color_${i}`) as string
+  const count = Number(formData.get('count') ?? 3)
+  for (let i = 0; i < count; i++) {
+    const id        = formData.get(`album_id_${i}`) as string
+    const title     = formData.get(`album_title_${i}`) as string
+    const artist    = formData.get(`album_artist_${i}`) as string
+    const color     = formData.get(`album_color_${i}`) as string
+    const image_url = formData.get(`album_image_${i}`) as string
     if (!title) continue
-    const payload = { title, artist, color_swatch: color || '#1a1a2a', display_order: i }
+    const payload = {
+      title,
+      artist,
+      color_swatch: color || '#1a1a2a',
+      image_url: image_url || '',
+      display_order: i,
+    }
     if (id) {
-      await sb.from('albums').upsert({ id, ...payload })
+      await sb.from('albums').update(payload).eq('id', id)
     } else {
       await sb.from('albums').insert(payload)
     }
   }
   revalidatePath('/')
-
 }
 
 // ─── Gear ─────────────────────────────────────────────────
@@ -133,6 +144,8 @@ export async function saveFreelance(formData: FormData) {
     services:       services_raw.split('\n').map((s) => s.trim()).filter(Boolean),
     projects_count: Number(formData.get('projects_count') ?? 0),
     available:      formData.get('available') === 'on',
+    cta_url:        formData.get('cta_url') as string || 'https://tomthomas.uk',
+    logo_url:       formData.get('logo_url') as string || '',
     updated_at:     new Date().toISOString(),
   }
   const { data: existing } = await sb.from('tt_content').select('id').single()

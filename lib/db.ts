@@ -44,6 +44,8 @@ export async function getSiteData(): Promise<SiteData> {
         services:       tt.services,
         projects_count: tt.projects_count,
         available:      tt.available,
+        cta_url:        tt.cta_url ?? 'https://tomthomas.uk',
+        logo_url:       tt.logo_url ?? '',
       } : siteData.freelance,
       posts:  posts?.length  ? posts  : siteData.posts,
       social: settings ? {

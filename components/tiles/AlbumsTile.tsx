@@ -44,7 +44,13 @@ export function AlbumsTile({ albums }: { albums: Album[] }) {
         <div className="flex flex-col gap-4 flex-1 justify-center">
           {albums.slice(0,3).map(album => (
             <div key={album.id} className="flex items-center gap-4">
-              <div style={{ width:56, height:56, borderRadius:8, background:album.color_swatch, border:'1px solid rgba(255,255,255,0.07)', flexShrink:0 }} />
+              {album.image_url ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={album.image_url} alt={album.title}
+                  style={{ width:56, height:56, borderRadius:8, objectFit:'cover', flexShrink:0, border:'1px solid rgba(255,255,255,0.07)' }} />
+              ) : (
+                <div style={{ width:56, height:56, borderRadius:8, background:album.color_swatch, border:'1px solid rgba(255,255,255,0.07)', flexShrink:0 }} />
+              )}
               <div className="min-w-0">
                 <p className="text-[15px] font-semibold truncate" style={{ color:'var(--text)' }}>{album.title}</p>
                 <p className="text-[12px]" style={{ color:'var(--text-subtle)' }}>{album.artist}</p>

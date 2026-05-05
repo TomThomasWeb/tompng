@@ -12,6 +12,23 @@ export default async function FreelanceAdmin() {
     <div>
       <h1 className="text-[22px] font-semibold mb-6" style={{ color: 'var(--text)' }}>Tom Thomas Web &amp; Media</h1>
       <form action={saveFreelance} className="flex flex-col gap-5">
+        <SectionCard title="Branding">
+          <div className="flex flex-col gap-4">
+            <FormField
+              label="Logo URL"
+              name="logo_url"
+              defaultValue={(tt as typeof tt & { logo_url?: string }).logo_url ?? ''}
+              placeholder="https://... (your logo image URL — leave blank to use text wordmark)"
+            />
+            <FormField
+              label="Visit site button URL"
+              name="cta_url"
+              defaultValue={(tt as typeof tt & { cta_url?: string }).cta_url ?? 'https://tomthomas.uk'}
+              placeholder="https://tomthomas.uk"
+            />
+          </div>
+        </SectionCard>
+
         <SectionCard title="Content">
           <div className="flex flex-col gap-4">
             <TextareaField
